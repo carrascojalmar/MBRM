@@ -1,0 +1,28 @@
+Package: MBRM
+Type: Package
+Title: Mixed Regression Models with Generalized Log-Gamma Random
+        Effects
+Version: 0.1.0
+Authors@R: c(person("Lizandra C.", "Fabio", email = "lizandra.fabio@ufba.br", role = "aut"),
+  person("Vanessa", "Barros", email = "vbarrosoliveira@gmail.com", role = "aut"),
+  person("Cristian", "Lobos", email = "clobos@usp.br ", role = "aut"),
+  person("Jalmar M.F.", "Carrasco", email = "carrasco.jalmar@ufba.br", role = c("aut", "cre")))
+Author: 
+  Lizandra C. Fabio [aut],
+  Vanessa Barros [aut],
+  Cristian Lobos [aut],
+  Jalmar M.F. Carrasco [aut, cre]
+Maintainer: Jalmar M. F. Carrasco <carrasco.jalmar@ufba.br>
+Description: "Fits binary mixed regression models with random effects
+    based on the generalized log-gamma distribution. Estimation is
+    performed by maximizing the log-likelihood using numerical
+    optimization."
+License: GPL-3
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 7.3.2
+LinkingTo: Rcpp
+Imports: Rcpp, stats, Formula, tibble, dplyr
+Depends: R (>= 3.5)
+NeedsCompilation: yes
+Packaged: 2025-07-31 12:33:51 UTC; carra
