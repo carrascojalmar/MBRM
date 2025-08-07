@@ -29,11 +29,13 @@ The original data was collected to evaluate the effect of a treatment over time 
 Covariates include demographic and clinical variables, and the response is binary (presence/absence of symptom).
 }
 \examples{
+\dontrun{
 data(toenail)
 head(toenail)
 
 # Fit the Bernoulli-LGG model
 fit <- MRMfit(y ~ Treatment + Time + Treatment:Time, data = toenail)
 summary(fit)
+}
 }
 \keyword{datasets}

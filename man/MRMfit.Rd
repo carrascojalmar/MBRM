@@ -4,7 +4,7 @@
 \alias{MRMfit}
 \title{Fit Mixed Regression Model with Log-Gamma Random Effects}
 \usage{
-MRMfit(formula, data, family = "bernoulli", method = "BFGS")
+MRMfit(formula, data, family = "bernoulli", method = "BFGS", ...)
 }
 \arguments{
 \item{formula}{A symbolic description of the model to be fitted, e.g., \code{y ~ x1 + x2}.
@@ -16,7 +16,12 @@ The response variable must be binary (0/1).}
 \item{family}{A character string specifying the response distribution. Currently only
 \code{"bernoulli"} is supported (default).}
 
-\item{method}{Optimization method to be used in \code{\link{optim}}. Default is \code{"BFGS"}.}
+\item{method}{Optimization method to be used in \code{\link[stats]{optim}}. One of
+\code{"Nelder-Mead"}, \code{"BFGS"}, \code{"CG"}, \code{"L-BFGS-B"}, \code{"SANN"}, or \code{"Brent"}.
+Default is \code{"BFGS"}.}
+
+\item{...}{Additional arguments passed to \code{\link[stats]{optim}}, such as \code{control},
+\code{lower}, or \code{upper} (when supported by the chosen method).}
 }
 \value{
 An object of class \code{"MRM"} containing:
@@ -30,20 +35,32 @@ An object of class \code{"MRM"} containing:
 \item{ep}{Estimated standard errors for parameters.}
 \item{iter}{Number of iterations used by the optimizer.}
 \item{family}{Family string used.}
+\item{method}{Optimization method used.}
 \item{data}{The original data frame used.}
 }
 \description{
 This function fits a mixed regression model for binary outcomes with random effects
 following a generalized log-gamma distribution. The estimation is performed by maximizing
-a custom log-likelihood using numerical optimization.
+a custom log-likelihood using numerical optimization via \code{\link[stats]{optim}}.
 }
 \examples{
 \dontrun{
+# Simulated data
 data1 <- rMRM(n = 50, m = rep(3, 50),
-theta = c(0.8, 1, -1), X = data.frame(x1 = rnorm(50),
-x2 = rnorm(50)))
-fit <- MRMfit(y ~ x1 + x2, data = data1)
-print(fit)
-summary(fit)
+              theta = c(0.8, 1, -1),
+              X = data.frame(x1 = rnorm(150), x2 = rnorm(150)))
+
+# Fit using BFGS (default)
+fit1 <- MRMfit(y ~ x1 + x2, data = data1)
+summary(fit1)
+
+# Fit using L-BFGS-B with bounds
+fit2 <- MRMfit(y ~ x1 + x2, data = data1,
+               method = "L-BFGS-B",
+               lower = c(1e-5, rep(-Inf, 3)),
+               upper = rep(Inf, 4),
+               control = list(factr = 1e7))
+summary(fit2)
 }
+
 }

@@ -25,4 +25,4 @@ LinkingTo: Rcpp
 Imports: Rcpp, stats, Formula, tibble, dplyr
 Depends: R (>= 3.5)
 NeedsCompilation: yes
-Packaged: 2025-07-31 12:33:51 UTC; carra
+Packaged: 2025-08-07 19:36:26 UTC; jalmarcarrasco

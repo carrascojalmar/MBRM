@@ -31,11 +31,13 @@ The original data was collected to evaluate the effect of a treatment over time 
 Covariates include demographic and clinical variables, and the response is binary (presence/absence of symptom).
 }
 \examples{
+\dontrun{
 data(Arthritis1)
 head(Arthritis1)
 
 # Fit the Bernoulli-LGG model
 fit <- MRMfit(y ~ Sex + Age + Treatment + Time, data = Arthritis1)
 summary(fit)
+}
 }
 \keyword{datasets}

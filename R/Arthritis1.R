@@ -22,10 +22,12 @@
 #' \emph{Arthritis.txt} — internal clinical dataset used in Bernoulli-GLG modeling study.
 #'
 #' @examples
+#' \dontrun{
 #' data(Arthritis1)
 #' head(Arthritis1)
 #'
 #' # Fit the Bernoulli-LGG model
 #' fit <- MRMfit(y ~ Sex + Age + Treatment + Time, data = Arthritis1)
 #' summary(fit)
+#' }
 "Arthritis1"

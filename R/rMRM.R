@@ -62,27 +62,28 @@ rMRM <- function(n, m, theta, X,
   N <- sum(m)
 
   bi <- switch(random,
-               gengamma = rgengamma(n, mu = 0, sigma = 1, lambda = lambda),
+               gengamma = rgengamma(n, mu = 0, sigma = lambda, lambda = lambda),
                normal = rnorm(n, mean = 0, sd = lambda),
                stop("Unsupported random effect: ", random))
 
+  vbi <- rep(bi, m)
 
   u <- as.vector(cbind(1, X) %*% beta)
 
-  eta <- u + bi
+  eta <- u + vbi
+
   p <- switch(link,
               cloglog = 1 - exp(-exp(eta)),
               logit   = exp(eta) / (1 + exp(eta)),
               probit  = pnorm(eta),
               stop("Unsupported link function: ", link))
 
-  stopifnot(length(p) == length(m))
+  stopifnot(length(p) == N)
 
-  mY <- unlist(Map(function(prob, reps) rbinom(reps, size = 1, prob = prob), p, m))
+  mY <- rbinom(N, size = 1, prob = p)
 
   id <- rep(seq_len(n), times = m)
-  mX <- as.data.frame(lapply(as.data.frame(X), function(col) rep(col, m)))
-  colnames(mX) <- paste0("x", seq_len(ncol(X)))
+  mX <- as.data.frame(X)
 
   out <- tibble::tibble(
     Ind = id,

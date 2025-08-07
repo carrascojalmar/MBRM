@@ -20,10 +20,12 @@
 #' \emph{toenail.txt} — internal clinical dataset used in Bernoulli-GLG modeling study.
 #'
 #' @examples
+#' \dontrun{
 #' data(toenail)
 #' head(toenail)
 #'
 #' # Fit the Bernoulli-LGG model
 #' fit <- MRMfit(y ~ Treatment + Time + Treatment:Time, data = toenail)
 #' summary(fit)
+#' }
 "toenail"
