@@ -19,7 +19,7 @@ A data frame with 1908 rows and 4 variables:
 toenail
 }
 \description{
-A data frame with 1908 observations on the following 4 variables.
+A data frame with 1908 observations on the following 5 variables.
 }
 \details{
 The Toenail data discussed in Molenberghs and Verbeke (2010) were obtained from a

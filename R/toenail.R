@@ -1,6 +1,6 @@
 #' toenail Dataset
 #'
-#' A data frame with 1908 observations on the following 4 variables.
+#' A data frame with 1908 observations on the following 5 variables.
 #'
 #' @format A data frame with 1908 rows and 4 variables:
 #' \describe{
