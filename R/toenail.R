@@ -9,7 +9,7 @@
 #'   \item{treatment}{Treatment group (0 = Treatment A, 1 = Treatment B)}
 #'   \item{month}{a numeric vector giving the time of the visit (not exactly monthly intervals
 #'          hence not round numbers)}
-#'   \item{Time}{a numeric vector giving the number of the visit}
+#'   \item{visit}{a numeric vector giving the number of the visit}
 #' }
 #'
 #' @details

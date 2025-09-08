@@ -4,10 +4,12 @@
 \alias{residuals.MRM}
 \title{Compute the randomized quantile residuals for MRM model}
 \usage{
-\method{residuals}{MRM}(object)
+\method{residuals}{MRM}(object, ...)
 }
 \arguments{
 \item{object}{An object of class \code{MRM}, typically returned from \code{\link{MRMfit}}.}
+
+\item{...}{Additional arguments passed to \code{\link{MRMfit}}.}
 }
 \value{
 A numeric vector of randomized quantile residuals.

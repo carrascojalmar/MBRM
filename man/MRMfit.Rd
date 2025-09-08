@@ -13,10 +13,11 @@ The response variable must be binary (0/1).}
 \item{data}{A data frame containing the variables in the model. The data must include an
 \code{Ind} column indicating cluster or subject IDs for the random effects.}
 
+\item{hessian}{Logical. Should a numerically differentiated Hessian matrix be returned?}
+
 \item{method}{Optimization method to be used in \code{\link[stats]{optim}}. One of
 \code{"Nelder-Mead"}, \code{"BFGS"}, \code{"CG"}, \code{"L-BFGS-B"}, \code{"SANN"}, or \code{"Brent"}.
-Default is \code{"BFGS"}.
-@param hessian Logical. Should a numerically differentiated Hessian matrix be returned?}
+Default is \code{"BFGS"}.}
 
 \item{...}{Additional arguments passed to \code{\link[stats]{optim}}, such as \code{control},
 \code{lower}, or \code{upper} (when supported by the chosen method).}
