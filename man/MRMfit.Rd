@@ -4,7 +4,7 @@
 \alias{MRMfit}
 \title{Fit Mixed Regression Model with Log-Gamma Random Effects}
 \usage{
-MRMfit(formula, data, family = "bernoulli", method = "BFGS", ...)
+MRMfit(formula, data, hessian = TRUE, method = "BFGS", ...)
 }
 \arguments{
 \item{formula}{A symbolic description of the model to be fitted, e.g., \code{y ~ x1 + x2}.
@@ -13,12 +13,10 @@ The response variable must be binary (0/1).}
 \item{data}{A data frame containing the variables in the model. The data must include an
 \code{Ind} column indicating cluster or subject IDs for the random effects.}
 
-\item{family}{A character string specifying the response distribution. Currently only
-\code{"bernoulli"} is supported (default).}
-
 \item{method}{Optimization method to be used in \code{\link[stats]{optim}}. One of
 \code{"Nelder-Mead"}, \code{"BFGS"}, \code{"CG"}, \code{"L-BFGS-B"}, \code{"SANN"}, or \code{"Brent"}.
-Default is \code{"BFGS"}.}
+Default is \code{"BFGS"}.
+@param hessian Logical. Should a numerically differentiated Hessian matrix be returned?}
 
 \item{...}{Additional arguments passed to \code{\link[stats]{optim}}, such as \code{control},
 \code{lower}, or \code{upper} (when supported by the chosen method).}
@@ -32,9 +30,8 @@ An object of class \code{"MRM"} containing:
 \item{loglik}{Maximized log-likelihood value.}
 \item{n}{Number of clusters or subjects.}
 \item{m}{Vector with the number of observations per cluster.}
-\item{ep}{Estimated standard errors for parameters.}
+\item{ep}{Estimated standard errors of the parameters.}
 \item{iter}{Number of iterations used by the optimizer.}
-\item{family}{Family string used.}
 \item{method}{Optimization method used.}
 \item{data}{The original data frame used.}
 }

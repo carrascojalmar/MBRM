@@ -8,11 +8,10 @@
 #'   The response variable must be binary (0/1).
 #' @param data A data frame containing the variables in the model. The data must include an
 #'   \code{Ind} column indicating cluster or subject IDs for the random effects.
-#' @param family A character string specifying the response distribution. Currently only
-#'   \code{"bernoulli"} is supported (default).
 #' @param method Optimization method to be used in \code{\link[stats]{optim}}. One of
 #'   \code{"Nelder-Mead"}, \code{"BFGS"}, \code{"CG"}, \code{"L-BFGS-B"}, \code{"SANN"}, or \code{"Brent"}.
 #'   Default is \code{"BFGS"}.
+#' @param hessian Logical. Should a numerically differentiated Hessian matrix be returned?
 #' @param ... Additional arguments passed to \code{\link[stats]{optim}}, such as \code{control},
 #'   \code{lower}, or \code{upper} (when supported by the chosen method).
 #'
@@ -24,9 +23,8 @@
 #' \item{loglik}{Maximized log-likelihood value.}
 #' \item{n}{Number of clusters or subjects.}
 #' \item{m}{Vector with the number of observations per cluster.}
-#' \item{ep}{Estimated standard errors for parameters.}
+#' \item{ep}{Estimated standard errors of the parameters.}
 #' \item{iter}{Number of iterations used by the optimizer.}
-#' \item{family}{Family string used.}
 #' \item{method}{Optimization method used.}
 #' \item{data}{The original data frame used.}
 #'
@@ -51,11 +49,12 @@
 #' }
 #'
 #' @importFrom stats glm model.frame model.matrix model.response optim pnorm
-#' @importFrom Formula Formula
+#' @import Formula
 #' @import stats
 #' @export
 #'
-MRMfit <- function(formula, data, family = "bernoulli", method = "BFGS", ...) {
+MRMfit <- function(formula, data, hessian = TRUE,
+                   method = "BFGS", ...) {
 
   aux <- glm(formula, data = data, family = "binomial")
   initial <- c(1, as.numeric(aux$coefficients))  # escala + betas
@@ -70,7 +69,7 @@ MRMfit <- function(formula, data, family = "bernoulli", method = "BFGS", ...) {
     y_list = y_list,
     X_list = X_list,
     method = method,
-    hessian = TRUE,
+    hessian = hessian,
     ...
   )
 
@@ -79,12 +78,11 @@ MRMfit <- function(formula, data, family = "bernoulli", method = "BFGS", ...) {
     formula = formula,
     coefficients = op$par[-1],   # betas
     scale = op$par[1],           # parâmetro de escala
-    loglik = op$value,
+    loglik = -op$value,
     n = max(data$Ind),
     m = as.numeric(table(data$Ind)),
-    ep = sqrt(diag(solve(op$hessian))),
+    ep = ep <- sqrt(diag(solve(op$hessian))),
     iter = op$counts[1],
-    family = family,
     method = method,
     optim = op,
     data = data
@@ -120,8 +118,7 @@ summary.MRM <- function(object, ...) {
   scale <- object$scale
   ep <- object$ep
   iter <- object$iter
-  value <- object$loglik
-  family <- object$family
+  value <- -object$loglik
   n <- object$n
 
   std_alpha <- ep[1]
@@ -147,10 +144,9 @@ summary.MRM <- function(object, ...) {
 
   out <- list(
     call = object$call,
-    family = family,
-    loglik = value,
-    AIC = -2 * value + 2 * length(ep),
-    BIC = -2 * value + log(n) * length(ep),
+    loglik = -value,
+    AIC = -2 * (-value) + 2 * length(ep),
+    BIC = -2 * (-value) + log(n) * length(ep),
     iter = iter,
     coef = coef_beta,
     scale = coef_scale
@@ -163,7 +159,6 @@ summary.MRM <- function(object, ...) {
 print.summary.MRM <- function(x, digits = 5, ...) {
   cat("Call:\n")
   print(x$call)
-  cat("\nDistribution:", x$family, "\n")
   cat("Log-Likelihood:", formatC(x$loglik, digits = digits, format = "f"), "\n")
   cat("AIC:", formatC(x$AIC, digits = digits, format = "f"), "\n")
   cat("BIC:", formatC(x$BIC, digits = digits, format = "f"), "\n")

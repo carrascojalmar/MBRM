@@ -2,17 +2,9 @@
 % Please edit documentation in R/rMRM.R
 \name{rMRM}
 \alias{rMRM}
-\title{Simulate Data from a Mixed Regression Model with Random Effects}
+\title{Simulate Data from a Mixed Regression Model with GLG Random Effects}
 \usage{
-rMRM(
-  n,
-  m,
-  theta,
-  X,
-  family = "bernoulli",
-  link = "cloglog",
-  random = "gengamma"
-)
+rMRM(n, m, theta, X)
 }
 \arguments{
 \item{n}{Integer. Number of clusters or subjects.}
@@ -23,14 +15,6 @@ rMRM(
 and the remaining values are the fixed effects coefficients, including the intercept.}
 
 \item{X}{A data frame or matrix of covariates with \code{n} rows (one per cluster). Should not include the intercept.}
-
-\item{family}{Character. The response distribution. Currently only \code{"bernoulli"} is supported (default).}
-
-\item{link}{Character. The link function to use. One of: \code{"cloglog"}, \code{"logit"}, or \code{"probit"}.
-Default is \code{"cloglog"}.}
-
-\item{random}{Character. Distribution for the random effects. One of: \code{"gengamma"} or \code{"normal"}.
-Default is \code{"gengamma"}.}
 }
 \value{
 A \code{tibble} containing the simulated dataset with the following columns:
@@ -39,7 +23,7 @@ A \code{tibble} containing the simulated dataset with the following columns:
   \item{y}{Binary response variable (0 or 1).}
   \item{x1, x2, ...}{Covariates as defined in \code{X}, repeated according to cluster size.}
 }
-The output also has an attribute \code{"proportions"} indicating the proportion of 0's and 1's in \code{y}.
+The output also has an attribute \code{"proportions"} indicating the proportions of 0's and 1's in \code{y}.
 }
 \description{
 This function simulates clustered binary response data from a mixed regression model with random effects.
@@ -54,9 +38,8 @@ theta <- c(0.5,1,-2,1)
 set.seed(123)
 X <- cbind(runif(n),rnorm(n))
 set.seed(456)
-data1 <- rMRM(n,m,theta,X,family="bernoulli",
-link="cloglog",random = "gengamma")
-head(data1
+data1 <- rMRM(n,m,theta,X)
+head(data1)
 }
 
 }

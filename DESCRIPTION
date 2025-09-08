@@ -13,7 +13,7 @@ Author:
   Cristian Lobos [aut],
   Jalmar M.F. Carrasco [aut, cre]
 Maintainer: Jalmar M. F. Carrasco <carrasco.jalmar@ufba.br>
-Description: "Fits binary mixed regression models with random effects
+Description: "This package fits binary mixed regression models with random effects
     based on the generalized log-gamma distribution. Estimation is
     performed by maximizing the log-likelihood using numerical
     optimization."
@@ -22,7 +22,7 @@ Encoding: UTF-8
 LazyData: true
 RoxygenNote: 7.3.2
 LinkingTo: Rcpp
-Imports: Rcpp, stats, Formula, tibble, dplyr
+Imports: Rcpp, stats, Formula, tibble, dplyr, ggplot2
 Depends: R (>= 3.5)
 NeedsCompilation: yes
-Packaged: 2025-08-07 19:36:26 UTC; jalmarcarrasco
+Packaged: 2025-09-08 18:44:06 UTC; jalmarcarrasco
