@@ -22,15 +22,14 @@ toenail
 A data frame with 1908 observations on the following 5 variables.
 }
 \details{
-The Toenail data discussed in Molenberghs and Verbeke (2010) were obtained from a
-randomized, double-blind, parallel-group, multicenter study for the comparison of two
-oral treatments (coded as A and B) for Toenail Dermatophyte Onychomycosis (TDO).
-The present study aimed to compare the efficacy of 12 weeks of continuous therapy
-with Treatment A or B. In total, 294 patients, distributed over 36 centers, were
-randomized. Subjects were followed during 12 weeks (3 months) of treatment and
-followed further up to 48 weeks (12 months). Measurements were taken at baseline
-every month during treatment and every 3 months afterward, resulting in a
-maximum of 7 measurements per subject.
+The Toenail data discussed in Molenberghs and Verbeke (2010) and Lesaffre and
+Spiessens (2001 come from a multicenter study comparing two oral
+treatments (coded as A and B) for toenail (Dermatophyte Onychomycosis - TDO)
+infection, involved patients evaluated at seven visits, i.e. on weeks 0, 4,
+8, 12, 24, 36 and 48. This study was evaluated on 294 patients comprising
+1908 measurements. The binary outcome was infection severity, coded
+as 0 (no and mild) and 1 (moderate and severe). The patients have not been
+treated prior to the first visit so this should be regarded as the baseline.
 }
 \examples{
 \dontrun{
@@ -46,5 +45,9 @@ summary(fit)
 Molenberghs G, Verbeke G (2010).
 Models for Discrete Longitudinal data.
 Springer, New York.
+
+Lesaffre, E. and Spiessens, B. (2001).
+On the effect of the number of quadrature points in a logistic random-effects model: An example.
+Journal of the Royal Statistical Society, Series C, 50, 325-335.
 }
 \keyword{datasets}
